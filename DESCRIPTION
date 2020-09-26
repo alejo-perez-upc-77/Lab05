@@ -8,4 +8,10 @@ Authors@R: c(person("Lukosevicius", "Martynas", email = "martynas2514@gmail.com"
 Maintainer: Alejo Perez <alejperz7@gmail.com>
 Description: Implementation of a Shiny app
 License: GPL-3
+Encoding: UTF-8
+Imports:
+  ggmap,
+  osmdata,
+  ggplot2,
+  sf
 RoxygenNote: 7.1.1
