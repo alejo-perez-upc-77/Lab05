@@ -60,7 +60,15 @@ osmObjects <- setRefClass("osmObjects",
                           cat("Call:\n")
                           cat("osmObjects(city = ", Location, ", object = ", Key ,")\n\n", sep = "")
                           cat("Coordinates:\n")
+<<<<<<< HEAD
                           write.table(as.data.frame(Coordinates))
+=======
+                          #cat(dimnames(RegressionCoeficients)[[1]], "\n")
+                          
+                          
+                          write.table(as.data.frame(Coordinates))
+
+>>>>>>> 93b156474e9bbd432aea5b537785a34a56587972
                         }
                         
                       )
