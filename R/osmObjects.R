@@ -9,7 +9,7 @@
 #'
 #' @return osmObjects class
 #' @export osmObjects
-#' @import osmdata ggmap ggplot2
+#' @import osmdata ggplot2 methods
 #' 
 #' 
 osmObjects <- setRefClass("osmObjects",
@@ -45,14 +45,22 @@ osmObjects <- setRefClass("osmObjects",
                           
                         },
                         plot = function(){ "Plots map with marked objects"
-                          suppressMessages(map <- get_map(getbb(Location), source = "osm"))
-                          suppressMessages(ggmap(map)+
-                            geom_sf(data = OsmData$osm_points,
-                                    inherit.aes = FALSE,
-                                    colour = "red",
-                                    fill = "red",
-                                    size = 1)+
-                            labs(x = "", y = ""))
+                          
+                          
+                          
+                          if (requireNamespace("ggmap", quietly=TRUE)) {
+                            suppressMessages(map <- ggmap::get_map(getbb(Location), source = "osm"))
+                            suppressMessages(ggmap::ggmap(map)+
+                                               geom_sf(data = OsmData$osm_points,
+                                                       inherit.aes = FALSE,
+                                                       colour = "red",
+                                                       fill = "red",
+                                                       size = 1)+
+                                               labs(x = "", y = ""))           # package foo in Suggests
+                          } else {
+                            warning("Would need ggmap for plot")  # message optional
+                          }
+                          
                         },
                         # Print function
                         print = function(){ "prints coordinates of requested objects"
@@ -60,15 +68,7 @@ osmObjects <- setRefClass("osmObjects",
                           cat("Call:\n")
                           cat("osmObjects(city = ", Location, ", object = ", Key ,")\n\n", sep = "")
                           cat("Coordinates:\n")
-<<<<<<< HEAD
                           write.table(as.data.frame(Coordinates))
-=======
-                          #cat(dimnames(RegressionCoeficients)[[1]], "\n")
-                          
-                          
-                          write.table(as.data.frame(Coordinates))
-
->>>>>>> 93b156474e9bbd432aea5b537785a34a56587972
                         }
                         
                       )

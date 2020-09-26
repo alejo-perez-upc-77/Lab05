@@ -24,7 +24,7 @@ gets Coordinates of objects in the specified Location
 \section{Methods}{
 
 \describe{
-\item{\code{initialize(city, object)}}{constructor}
+\item{\code{initialize(city, object)}}{constructor object = atm, bank, pharmacy, hospital, supermarket, fuel}
 
 \item{\code{plot()}}{Plots map with marked objects}
 

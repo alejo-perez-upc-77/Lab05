@@ -1,17 +1,19 @@
 Package: Lab05
 Type: Package
-Title: A package connecting to a web API, 
+Title: A package connecting to a web API 
 Version: 1.0
 Date: 2020-09-23
 Authors@R: c(person("Lukosevicius", "Martynas", email = "martynas2514@gmail.com", role = "cre"),
              person("Alejo", "Perez", email = "alejperz7@gmail.com", role = "aut"))
 Maintainer: Alejo Perez <alejperz7@gmail.com>
-Description: Implementation of a Shiny app
+Description: Implementation of a Shiny app.
 License: GPL-3
 Encoding: UTF-8
 Imports:
-  ggmap,
   osmdata,
   ggplot2,
-  sf
+  sf,
+  methods
+Suggests:
+  ggmap
 RoxygenNote: 7.1.1
