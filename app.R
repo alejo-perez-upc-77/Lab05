@@ -44,10 +44,14 @@ server <- function(input, output) {
   # This expression that generates a histogram is wrapped in a call
   # to renderPlot to indicate that:
   #
-  #    re-executed when inputs (input$bins) change
+  # 1. It is "reactive" and therefore should be automatically
   # 2. Its output type is a plot
-  output$value <- renderText({ input$location })
-  output$distPlot <- renderPlot({
+  output$value <- renderText({ 
+    
+    if(input$location == "write location") {location <- "Linkoping"}
+    else location <- input$location
+    location })
+    output$distPlot <- renderPlot({
     
     if(input$location == "write location") {location <- "Linkoping"}
     else location <- input$location
