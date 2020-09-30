@@ -6,7 +6,7 @@ library(osmdata)
 ui <- fluidPage(
   
   # App title ----
-  titlePanel("Hello Shiny!"),
+  titlePanel("Lab05 project - OSM"),
   
   # Sidebar layout with input and output definitions ----
   sidebarLayout(
