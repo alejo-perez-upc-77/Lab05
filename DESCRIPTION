@@ -13,6 +13,7 @@ Imports:
   osmdata,
   ggplot2,
   sf,
+  testthat
   methods
 Suggests:
   ggmap
