@@ -10,11 +10,11 @@ Description: Implementation of a Shiny app.
 License: GPL-3
 Encoding: UTF-8
 Imports:
-  osmdata,
   ggplot2,
   sf,
   testthat,
-  methods
+  methods,
+  httr
 Suggests:
   ggmap
 RoxygenNote: 7.1.1

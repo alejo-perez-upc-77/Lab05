@@ -2,5 +2,5 @@
 
 export(osmObjects)
 import(ggplot2)
+import(httr)
 import(methods)
-import(osmdata)
