@@ -7,7 +7,7 @@
 getBoundingBox(city)
 }
 \arguments{
-\item{city}{}
+\item{city}{character  - name of the location, can be not only city}
 }
 \value{
 matrix with coordinates

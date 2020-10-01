@@ -82,7 +82,7 @@ osmObjects <- setRefClass("osmObjects",
 
 #' Get request for boundary box of the element
 #'
-#' @param city  
+#' @param city character  - name of the location, can be not only city
 #'
 #' @return matrix with coordinates
 #' @export
