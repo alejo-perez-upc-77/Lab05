@@ -1,7 +1,8 @@
 library(shiny)
 library(Lab05)
 library(ggmap)
-library(osmdata)
+library(sf)
+
 # Define UI for app that draws a histogram ----
 ui <- fluidPage(
   
@@ -30,8 +31,9 @@ ui <- fluidPage(
     mainPanel(
       
       # Output: Histogram ----
-      plotOutput(outputId = "distPlot", height = "800"),
-      verbatimTextOutput("value")
+      verbatimTextOutput("value"),
+      plotOutput(outputId = "distPlot", height = "800")
+      
     )
   )
 )

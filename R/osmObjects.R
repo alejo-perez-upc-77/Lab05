@@ -9,7 +9,7 @@
 #'
 #' @return osmObjects class
 #' @export osmObjects
-#' @import ggplot2 methods httr
+#' @import ggplot2 methods httr sf
 #' 
 #' 
 osmObjects <- setRefClass("osmObjects",
@@ -80,9 +80,16 @@ osmObjects <- setRefClass("osmObjects",
 )
 
 
+#' Get request for boundary box of the element
+#'
+#' @param city  
+#'
+#' @return matrix with coordinates
+#' @export
+
 getBoundingBox <- function(city){
   tryCatch(
-    data <- GET("https://nominatim.openstreetmap.org/search?", query = list(city = "Klaipeda", format = "json", limit = 1)),
+    data <- GET("https://nominatim.openstreetmap.org/search?", query = list(city = city, format = "json", limit = 1)),
     error = function(x){stop("connection problem")})
   stopifnot("getbb status code is not 200" = data$status_code == 200)
   content <- content(data,"parsed")
@@ -103,6 +110,7 @@ getBoundingBox <- function(city){
 #' @param value  ex. atm
 #'
 #' @return data frame of coordinates
+#' @export
 
 
 getElements <- function(bbox, key, value){ 
