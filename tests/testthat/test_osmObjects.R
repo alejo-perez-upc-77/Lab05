@@ -29,7 +29,7 @@ test_that("Strange city and wrong object", {
 
 
 test_that("getBoundingBox rejects strange city", {
-  expect_error(getBoundingBox(213))
+  expect_error(getBoundingBox(213)) # reject integer
   #expect_error(getBoundingBox("123")) # finds city in ljiublijana
   expect_error(getBoundingBox("apsdmap aspdlasa12"))
   #expect_error(getBoundingBox("%sad")) # city Szágy
@@ -57,7 +57,7 @@ test_that("getElements rejects strange bbox matrix 2", {
   expect_error(getElements(bbox, "amenity", "pharmacy"))
 })
 
-bbox <- matrix(nrow = 2, ncol = 2)
+bbox <- matrix(nrow = 2, ncol = 2) # Retrieve error if NAs
 bbox[1, ] <- c(32, 23)
 bbox[2, ] <- c(32, 32)
 
