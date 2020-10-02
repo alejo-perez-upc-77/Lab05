@@ -88,6 +88,7 @@ osmObjects <- setRefClass("osmObjects",
 #' @export
 
 getBoundingBox <- function(city){
+  stopifnot("city is not character" = is.character(city))
   tryCatch(
     data <- GET("https://nominatim.openstreetmap.org/search?", query = list(city = city, format = "json", limit = 1)),
     error = function(x){stop("connection problem")})
@@ -115,7 +116,7 @@ getBoundingBox <- function(city){
 
 
 getElements <- function(bbox, key, value){ 
-  
+  stopifnot("bbox matrix is not numeric" = is.numeric(bbox))
   #forming query
   bboxString <- paste("[bbox: ", bbox[2,1], ", ", bbox[1,1], ", ", bbox[2,2], ", ", bbox[1,2] ,"]" ,sep = "")
   nodeString <- paste("node[", key, "=", value, "];")

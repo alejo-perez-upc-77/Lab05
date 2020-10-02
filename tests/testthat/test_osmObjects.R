@@ -7,10 +7,10 @@ context("osmObjects")
 
 test_that("Strange name city", {
   expect_error(osmObjects(213, "fuel"))
-  expect_error(osmObjects("123", "fuel"))
+ #expect_error(osmObjects("123", "fuel")) # finds city in ljiublijana
   expect_error(osmObjects("apsdmap aspdlasa12", "fuel"))
   expect_error(osmObjects("", "fuel"))
-  expect_error(osmObjects("%sad", "fuel"))
+ #expect_error(osmObjects("%sad", "fuel")) # city Szágy
 })
 
 test_that("Object passed not in the list", {
@@ -30,9 +30,9 @@ test_that("Strange city and wrong object", {
 
 test_that("getBoundingBox rejects strange city", {
   expect_error(getBoundingBox(213))
-  expect_error(getBoundingBox("123"))
+  #expect_error(getBoundingBox("123")) # finds city in ljiublijana
   expect_error(getBoundingBox("apsdmap aspdlasa12"))
-  expect_error(getBoundingBox("%sad"))
+  #expect_error(getBoundingBox("%sad")) # city Szágy
 })
 
 bbox <- matrix(nrow = 2, ncol = 2)
@@ -41,7 +41,7 @@ test_that("getElements rejects strange bbox matrix", {
   expect_error(getElements(bbox, "amenity", "pharmacy"))
 })
 
-bbox[1,] <- c("sd", 23)
+bbox[1,] <- c("sad", 23)
 bbox[2,] <- c(23, 42)
 
 test_that("getElements rejects strange bbox matrix 2", {
@@ -58,8 +58,8 @@ test_that("getElements rejects strange bbox matrix 2", {
 })
 
 bbox <- matrix(nrow = 2, ncol = 2)
-bbox[1,] <- c(32, 23)
-bbox[2] <- c(32, 32)
+bbox[1, ] <- c(32, 23)
+bbox[2, ] <- c(32, 32)
 
 test_that("getElements rejects strange key", {
   expect_error(getElements(bbox, "safsa", "pharmacy"))
