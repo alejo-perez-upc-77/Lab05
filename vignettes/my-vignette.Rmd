@@ -1,8 +1,8 @@
 ---
-title: "my-vignette"
+title: "OSM Data App"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{my-vignette}
+  %\VignetteIndexEntry{OSM Data App}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
