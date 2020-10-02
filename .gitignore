@@ -41,3 +41,4 @@ vignettes/*.pdf
 # Travis .yml
 .travis.yml
 
+inst/doc

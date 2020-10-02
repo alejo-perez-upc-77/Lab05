@@ -16,5 +16,8 @@ Imports:
   methods,
   httr
 Suggests:
-  ggmap
+    ggmap,
+    knitr,
+    rmarkdown
 RoxygenNote: 7.1.1
+VignetteBuilder: knitr
