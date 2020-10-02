@@ -17,3 +17,65 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(Lab05)
 ```
+
+# What is this package?
+
+The OSM Data App is a GUI application meant to find a city and retrieve data from Open Street Maps API. These data are coordinates plotted on a map plots of establishments instances of user choice (ATMs, pharmacies, hospitals, supermarkets and gas stations). 
+
+## osmObjects Class
+
+This class takes 2 **Character** type inputs named  **city** (an actual city name) and an type of establishment (**object**) contained in this list: **ATMs**, **pharmacies**, **hospitals**, **supermarkets** and **gas stations**. The class uses outside functions **getBoundingBox** and *getElements** to request for a boundary box of the city passed and the coordinates of the object demanded respectively. 
+
+### Methods
+
+#### plot
+
+Uses **ggmap** and **ggplot2** to plot the city in a map with marked coordinates of the object passed over this map.
+Example:
+
+```{r include = TRUE}
+Barcelona <- osmObjects(city="Barcelona", object="hospital")
+Barcelona$plot()
+```
+ 
+#### print
+
+Prints coordinates of requested objects
+Example:
+
+```{r include = TRUE}
+Barcelona <- osmObjects(city="Barcelona", object="hospital")
+Barcelona$print()
+```
+
+### Functions used inside osmObjects Class
+
+#### getBoundingBox 
+Gets request for boundary box of the element **city** where the object coordinates will be located. The argument passed (**city**) should be a **character**. The output obtained will be a 2x2 Matrix.
+Example:
+
+```{r include = TRUE}
+getBoundingBox("Barcelona")
+```
+
+#### getElements
+
+Gets request for element from overpass API. Its arguments are **bbox**, **key**, **value**. The **bbox** is the bounding box obtained out of the  **getBoundingBox** function, a matrix. The **key-value** pair is a couple of character variables from this mapping:
+
+```{r include = TRUE}
+table = cbind(c("atm", "bank", "pharmacy", "hospital", "supermarket", "fuel"), c("amenity", "amenity", "amenity", "amenity", "shop", "amenity" ))
+
+knitr::kable(
+  table, caption = 'Key-Value pairs'
+)
+```
+
+Finally, it retrieves the coordinates for the object demanded inside the **bbox** boundaries in a **data.frame**. 
+Example:
+
+```{r include = TRUE}
+Barcelona_bbox <- getBoundingBox("Barcelona")
+
+getElements(Barcelona_bbox, "amenity", "hospital")
+```
+
