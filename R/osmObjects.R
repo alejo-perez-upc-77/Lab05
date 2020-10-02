@@ -118,6 +118,7 @@ getBoundingBox <- function(city){
 
 getElements <- function(bbox, key, value){ 
   
+  stopifnot("wrong bbox matrix" = !anyNA(bbox) && is.numeric(bbox), "key is not character" = is.character(key), "value is not character" = is.character(value))
   #forming query
   bboxString <- paste("[bbox: ", bbox[2,1], ", ", bbox[1,1], ", ", bbox[2,2], ", ", bbox[1,2] ,"]" ,sep = "")
   nodeString <- paste("node[", key, "=", value, "];")
