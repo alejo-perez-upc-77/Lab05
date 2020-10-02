@@ -89,6 +89,7 @@ osmObjects <- setRefClass("osmObjects",
 
 getBoundingBox <- function(city){
   stopifnot("city is not character" = is.character(city))
+  #comment
   tryCatch(
     data <- GET("https://nominatim.openstreetmap.org/search?", query = list(city = city, format = "json", limit = 1)),
     error = function(x){stop("connection problem")})
