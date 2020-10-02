@@ -48,7 +48,7 @@ osmObjects <- setRefClass("osmObjects",
                         },
                         plot = function(){ "Plots map with marked objects"
                           
-                          Points <- st_as_sf(x = Coordinates, 
+                          Points <- sf::st_as_sf(x = Coordinates, 
                                                   coords = c("lon", "lat"),
                                                   crs = "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0")
                           
@@ -56,12 +56,12 @@ osmObjects <- setRefClass("osmObjects",
                           if (requireNamespace("ggmap", quietly=TRUE)) {
                             suppressMessages(map <- ggmap::get_map(getBoundingBox(Location), source = "osm"))
                             suppressMessages(ggmap::ggmap(map)+
-                                               geom_sf(data = Points,
+                                               ggplot2::geom_sf(data = Points,
                                                        inherit.aes = FALSE,
                                                        colour = "red",
                                                        fill = "red",
                                                        size = 1)+
-                                               labs(x = "", y = ""))           # package foo in Suggests
+                                               ggplot2::labs(x = "", y = ""))           # package foo in Suggests
                           } else {
                             warning("Would need ggmap for plot")  # message optional
                           }

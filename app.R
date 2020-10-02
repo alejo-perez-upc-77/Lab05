@@ -1,7 +1,5 @@
 library(shiny)
 library(Lab05)
-library(ggmap)
-library(sf)
 
 # Define UI for app that draws a histogram ----
 ui <- fluidPage(
