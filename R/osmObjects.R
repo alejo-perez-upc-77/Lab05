@@ -91,6 +91,7 @@ getBoundingBox <- function(city){
   tryCatch(
     data <- GET("https://nominatim.openstreetmap.org/search?", query = list(city = city, format = "json", limit = 1)),
     error = function(x){stop("connection problem")})
+  
   stopifnot("getbb status code is not 200" = data$status_code == 200)
   content <- content(data,"parsed")
   stopifnot("city not found" = length(content) >= 1 )
@@ -127,8 +128,8 @@ getElements <- function(bbox, key, value){
   tryCatch(
     resp <- GET(baseurl, query = list(data = q)),
     error = function(x){stop("connection problem")})
-  stopifnot("getbb status code is not 200" = resp$status_code == 200)
   
+  stopifnot("getbb status code is not 200" = resp$status_code == 200)
   
   # parsing data
   content <- content(resp, "parsed")$elements

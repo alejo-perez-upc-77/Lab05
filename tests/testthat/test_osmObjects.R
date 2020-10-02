@@ -1,6 +1,76 @@
+# Martynas Lukosevicius: Check what we do with strange city names
+# Martynas Lukosevicius: Check what we do with keys which not exist
+# Martynas Lukosevicius: Find a small city which has one supermarket and check coordinates
+
+
 context("osmObjects")
 
-test_that("lenreg rejects errounous input", {
-  expect_error(linreg_mod <- linreg$new(formula = Petal.Length~Sepdsal.Width+Sepal.Length, data=iris))
-  expect_error(linreg_mod <- linreg$new(formula = Petal.Length~Sepdsal.Width+Sepal.Length, data=irfsfdis))
+test_that("Strange name city", {
+  expect_error(osmObjects(213, "fuel"))
+  expect_error(osmObjects("123", "fuel"))
+  expect_error(osmObjects("apsdmap aspdlasa12", "fuel"))
+  expect_error(osmObjects("", "fuel"))
+  expect_error(osmObjects("%sad", "fuel"))
 })
+
+test_that("Object passed not in the list", {
+  expect_error(osmObjects("Linköping", "123"))
+  expect_error(osmObjects("Linköping", ""))
+  expect_error(osmObjects("Linköping", "cash"))
+})
+
+test_that("Strange city and wrong object", {
+  expect_error(osmObjects("", "123"))
+  expect_error(osmObjects("", ""))
+  expect_error(osmObjects("123", ""))
+  expect_error(osmObjects("asfaa", "cash"))
+  expect_error(osmObjects("%sad", "cash"))
+})
+
+
+test_that("getBoundingBox rejects strange city", {
+  expect_error(getBoundingBox(213))
+  expect_error(getBoundingBox("123"))
+  expect_error(getBoundingBox("apsdmap aspdlasa12"))
+  expect_error(getBoundingBox("%sad"))
+})
+
+bbox <- matrix(nrow = 2, ncol = 2)
+
+test_that("getElements rejects strange bbox matrix", {
+  expect_error(getElements(bbox, "amenity", "pharmacy"))
+})
+
+bbox[1,] <- c("sd", 23)
+bbox[2,] <- c(23, 42)
+
+test_that("getElements rejects strange bbox matrix 2", {
+  expect_error(getElements(bbox, "amenity", "pharmacy"))
+})
+
+bbox <- matrix(nrow = 2, ncol = 2)
+bbox[1,] <- c(32, 23)
+bbox[2,1] <- 32
+
+
+test_that("getElements rejects strange bbox matrix 2", {
+  expect_error(getElements(bbox, "amenity", "pharmacy"))
+})
+
+bbox <- matrix(nrow = 2, ncol = 2)
+bbox[1,] <- c(32, 23)
+bbox[2] <- c(32, 32)
+
+test_that("getElements rejects strange key", {
+  expect_error(getElements(bbox, "safsa", "pharmacy"))
+  expect_error(getElements(bbox, "", "pharmacy"))
+  expect_error(getElements(bbox, 2352, "pharmacy"))
+})
+
+
+test_that("getElements rejects strange value", {
+  expect_error(getElements(bbox, "amenity", "cash"))
+  expect_error(getElements(bbox, "amenity", ""))
+  expect_error(getElements(bbox, "amenity", 123))
+})
+
