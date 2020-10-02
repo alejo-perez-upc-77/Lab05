@@ -88,6 +88,7 @@ osmObjects <- setRefClass("osmObjects",
 #' @export
 
 getBoundingBox <- function(city){
+  #comment
   tryCatch(
     data <- GET("https://nominatim.openstreetmap.org/search?", query = list(city = city, format = "json", limit = 1)),
     error = function(x){stop("connection problem")})
