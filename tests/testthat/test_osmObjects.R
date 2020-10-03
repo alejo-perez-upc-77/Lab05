@@ -62,15 +62,15 @@ bbox[1, ] <- c(32, 23)
 bbox[2, ] <- c(32, 32)
 
 test_that("getElements rejects strange key", {
-  expect_error(getElements(bbox, "safsa", "pharmacy"))
+  expect_error(getElements(bbox, "Cactus city 21312", "pharmacy"))
   expect_error(getElements(bbox, "", "pharmacy"))
   expect_error(getElements(bbox, 2352, "pharmacy"))
 })
 
 
 test_that("getElements rejects strange value", {
-  expect_error(getElements(bbox, "amenity", "cash"))
-  expect_error(getElements(bbox, "amenity", ""))
+  expect_error(getElements(bbox, "amenity", "wefb;"))
+  expect_error(getElements(bbox, "amenity", "%£H"))
   expect_error(getElements(bbox, "amenity", 123))
 })
 
