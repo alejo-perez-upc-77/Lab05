@@ -41,9 +41,12 @@ osmObjects <- setRefClass("osmObjects",
                           # coord <- as.matrix(sf::as_Spatial(OsmData$osm_points)@coords)
                           # rownames(coord) <- OsmData$osm_points$name
                           # Coordinates <<- coord
+                          #initializing data frame
                           
                           Coordinates <<- getElements(getBoundingBox(Location), Keys[[Key]], Key )
-                          
+                          if(length(Coordinates) == 0 ){ # empty data frame, will fail plot 
+                            Coordinates <<- data.frame(lat = numeric(), lon = numeric())
+                          }
                           
                         },
                         plot = function(){ "Plots map with marked objects"
@@ -137,5 +140,7 @@ getElements <- function(bbox, key, value){
   # parsing data
   content <- content(resp, "parsed")$elements
   data <- lapply(content, function(x){return(list(lat = x$lat, lon = x$lon))})
-  return(do.call(rbind.data.frame, data))
+  dataFrame <- do.call(rbind.data.frame, data)
+  rownames(dataFrame) <- seq(length=nrow(dataFrame))
+  return(dataFrame)
 }

@@ -13,7 +13,7 @@ ui <- fluidPage(
     # Sidebar panel for inputs ----
     sidebarPanel(
       
-      # Input: Slider for the number of bins ----
+      # Input: text input and multiple selection input ----
     textInput("location", "Location", "write location"),
     
     selectInput("Item", "What you look for:",
@@ -28,7 +28,7 @@ ui <- fluidPage(
     # Main panel for displaying outputs ----
     mainPanel(
       
-      # Output: Histogram ----
+      # Output: text and plot ----
       verbatimTextOutput("value"),
       plotOutput(outputId = "distPlot", height = "800")
       
@@ -36,23 +36,19 @@ ui <- fluidPage(
   )
 )
 
-# Define server logic required to draw a histogram ----
+# Define server logic required to plot ----
 server <- function(input, output) {
   
-  # Histogram of the Old Faithful Geyser Data ----
-  # with requested number of bins
-  # This expression that generates a histogram is wrapped in a call
-  # to renderPlot to indicate that:
-  #
-  # 1. It is "reactive" and therefore should be automatically
-  # 2. Its output type is a plot
+#text
   output$value <- renderText({ 
     
+# select main location - linkoping
     if(input$location == "write location") {location <- "Linkoping"}
     else location <- input$location
     location })
+  
+# plot
     output$distPlot <- renderPlot({
-    
     if(input$location == "write location") {location <- "Linkoping"}
     else location <- input$location
     osm <- osmObjects(location, input$Item)
