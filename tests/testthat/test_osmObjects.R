@@ -57,7 +57,20 @@ test_that("getElements rejects strange bbox matrix 2", {
   expect_error(getElements(bbox, "amenity", "pharmacy"))
 })
 
+bbox <- matrix(nrow = 2, ncol = 2) # Retrieve error if NAs
+bbox[1, ] <- c(32, 23)
+bbox[2, ] <- c(32, 32)
+
+test_that("getElements rejects strange key", {
+  expect_error(getElements(bbox, "safsa", "pharmacy"))
+  expect_error(getElements(bbox, "", "pharmacy"))
+  expect_error(getElements(bbox, 2352, "pharmacy"))
+})
 
 
-
+test_that("getElements rejects strange value", {
+  expect_error(getElements(bbox, "amenity", "cash"))
+  expect_error(getElements(bbox, "amenity", ""))
+  expect_error(getElements(bbox, "amenity", 123))
+})
 
