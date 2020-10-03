@@ -77,6 +77,6 @@ test_that("getElements rejects strange value", {
 
 London <- osmObjects("London", "hospital")
 test_that("Desired output with big city", {
-  expect_equal(class(London$coordinates), "data.frame")
+  expect_equal(class(London$Coordinates), "data.frame")
   expect_false(dim(London$Coordinates)[1] == 0 )
 })
