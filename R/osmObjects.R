@@ -34,13 +34,7 @@ osmObjects <- setRefClass("osmObjects",
                           
                           Location <<- city
                           Key <<- tolower(object)
-                          # q <- opq(bbox = city,timeout = 25) %>%
-                          #   add_osm_feature(Keys[[Key]], Key)
-                          # 
-                          # OsmData <<- osmdata_sf(q)
-                          # coord <- as.matrix(sf::as_Spatial(OsmData$osm_points)@coords)
-                          # rownames(coord) <- OsmData$osm_points$name
-                          # Coordinates <<- coord
+
                           #initializing data frame
                           
                           Coordinates <<- getElements(getBoundingBox(Location), Keys[[Key]], Key )
@@ -85,7 +79,7 @@ osmObjects <- setRefClass("osmObjects",
 
 #' Get request for boundary box of the element
 #'
-#' @param city character  - name of the location, can be not only city
+#' @param city character  - name of the location, can be only city
 #'
 #' @return matrix with coordinates
 #' @export
@@ -125,7 +119,9 @@ getElements <- function(bbox, key, value){
   #forming query
   bboxString <- paste("[bbox: ", bbox[2,1], ", ", bbox[1,1], ", ", bbox[2,2], ", ", bbox[1,2] ,"]" ,sep = "")
   nodeString <- paste("node[", key, "=", value, "];")
-  q <- paste0("[out:json]", bboxString, "[timeout:800];(", nodeString, ");  out body;")
+  wayString <- paste("way[", key, "=", value, "];")
+  relationString <- paste("relation[", key, "=", value, "];")
+  q <- paste0("[out:json]", bboxString, "[timeout:800];(", nodeString, wayString, relationString, "); (._;>;);  out body;")
   
   
   # api request
